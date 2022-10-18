@@ -1,0 +1,98 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
+
+/**
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
+ * project.
+ */
+public class Robot extends TimedRobot {
+
+   //Compressor compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+   WPI_TalonSRX shooter = new WPI_TalonSRX(1);
+   XboxController controlStick = new XboxController(0);
+   //DoubleSolenoid bSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 0);
+
+  @Override
+  public void robotInit() {
+
+    System.out.println("(o o)");
+    System.out.println("/___\\");
+    System.out.println("Austin knows.");
+    System.out.println("...");
+    System.out.println("This makes bob worried.");
+  
+  
+  
+  
+  }
+
+  
+  @Override
+  public void robotPeriodic() {
+    SmartDashboard.putNumber("RPM", shooter.getSelectedSensorVelocity());
+  }
+
+  
+  @Override
+  public void autonomousInit() {}
+
+  @Override
+  public void autonomousPeriodic() {}
+
+  @Override
+  public void teleopInit() {}
+
+  @Override
+  public void teleopPeriodic() {
+    
+    if (controlStick.getAButton()){
+      shooter.set(ControlMode.Velocity, -5000);
+    } else if (controlStick.getBButton()){
+      shooter.set(ControlMode.Velocity, -10000);
+
+    } else if (controlStick.getXButton()){
+      shooter.set(ControlMode.Velocity, -15000);
+
+    } else if (controlStick.getYButton()){
+      shooter.set(ControlMode.Velocity, -28500);
+      
+    } else {
+      shooter.stopMotor();
+    }
+      // if (controlStick.getAButton()){
+      //   bSolenoid.set(kForward);
+      // } else if (controlStick.getBButton()){
+      //   bSolenoid.set(kReverse);
+      // } else {
+      //   bSolenoid.set(kOff);
+      // }
+
+  }
+  @Override
+  public void disabledInit() {}
+
+  @Override
+  public void disabledPeriodic() {}
+
+  @Override
+  public void testInit() {}
+
+  @Override
+  public void testPeriodic() {}
+}
